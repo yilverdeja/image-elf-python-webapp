@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw
 from io import BytesIO
 
 # constants
+MAX_PIXELS = 10000
 ELF_GREEN_COLOR = "#2ae5bc"
 WHITE_COLOR = "white"
 IMAGE_TYPES = ["png", "jpeg"]
@@ -13,14 +14,14 @@ def validate_form(image_width: str, image_height: str, image_type: str):
     errors = {}
     try:
         width = int(image_width)
-        if width <= 0:
+        if width <= 0 or width > MAX_PIXELS:
             raise ValueError("Width must be a positive integer")
     except ValueError as e:
         errors['width'] = str(e)
     
     try:
         height = int(image_height)
-        if height <= 0:
+        if height <= 0 or height > MAX_PIXELS:
             raise ValueError("Height must be a positive integer")
     except ValueError as e:
         errors['height'] = str(e)
