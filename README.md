@@ -1,6 +1,8 @@
-# Image-Elf Mini
+# Image-Elf Mini 	📸🧝🧝🏻🧝🏼🧝🏽🧝🏾🧝🏿
 
 A simple flask app to create custom sized dummy images for testing
+
+![image](https://github.com/user-attachments/assets/c85b6682-20d2-4ba6-9277-c718a7f25387)
 
 ## Features
 
@@ -84,6 +86,7 @@ To improve this functionality of this tool:
 
 - Limit maximum of image and height size (to avoid Memory Errors)
 - Catch `MemoryError` exceptions and handle accordingly
+- Prettify it (Basic UI similar to Image Elf)
 - Add more configurations:
   - Select Background color (single color, or noise)
   - Choose to Show/Hide text
