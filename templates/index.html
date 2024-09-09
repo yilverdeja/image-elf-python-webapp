@@ -3,56 +3,83 @@
   <head>
     <title>img-elf</title>
     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/styles.css') }}"
+    />
+    <link
       rel="shortcut icon"
       href="{{ url_for('static', filename='favicon.ico') }}"
     />
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="dropZone" class="drop-zone">
-      <h1>img-elf</h1>
-      <form id="createForm" action="/" method="post">
-        <div>
-          <label for="imageType">Type:</label>
-          <select name="imageType" id="imageType" required>
-            <option value="png">PNG</option>
-            <option value="jpeg">JPEG</option>
-          </select>
-        </div>
-        <br />
+    <div id="app">
+      <div id="header">
+        <img src="{{ url_for('static', filename='logos/logo-white.svg') }}" />
+        <h1>img-elf</h1>
+      </div>
+      <div id="sub-header">
+        <h2>Generate an image of any size</h2>
+      </div>
+      <div class="card">
+        <form id="createForm" action="/" method="post">
+          <div class="form-input">
+            <label for="imageType">Image Format</label>
+            <select name="imageType" id="imageType" required>
+              <option value="png">PNG</option>
+              <option value="jpeg">JPEG</option>
+            </select>
+          </div>
+          <br />
 
-        <div>
-          <label for="imageWidth">Width:</label>
-          <input
-            id="imageWidth"
-            type="number"
-            name="imageWidth"
-            min="1"
-            step="1"
-            value="100"
-            required
-          />
-          <span>px</span>
-        </div>
-        <br />
+          <div id="image-size">
+            <div class="form-input">
+              <label for="imageWidth">Width <span>(px)</span></label>
+              <input
+                id="imageWidth"
+                type="number"
+                name="imageWidth"
+                min="1"
+                step="1"
+                value="100"
+                required
+              />
+            </div>
 
-        <div>
-          <label for="imageHeight">Height:</label>
-          <input
-            id="imageHeight"
-            type="number"
-            name="imageHeight"
-            min="1"
-            step="1"
-            value="100"
-            required
-          />
-          <span>px</span>
-        </div>
-        <br />
+            <div class="form-input">
+              <label for="imageHeight">Height <span>(px)</span></label>
+              <input
+                id="imageHeight"
+                type="number"
+                name="imageHeight"
+                min="1"
+                step="1"
+                value="100"
+                required
+              />
+            </div>
+          </div>
+          <br />
 
-        <button type="submit">Create</button>
-      </form>
+          <button type="submit">Generate Image</button>
+        </form>
+      </div>
+      <div id="instructions">
+        <p>
+          Set your desired dimensions, select the image format, and download
+          your creation instantly!
+        </p>
+      </div>
+      <footer id="footer">
+        <span>@2024 img-elf</span>
+        <a
+          href="https://github.com/yilverdeja/image-elf-python-webapp"
+          target="_blank"
+          ><img
+            src="{{ url_for('static', filename='logos/github-logo.svg') }}"
+            class="invert-logo"
+        /></a>
+      </footer>
+
       {% if errors %}
       <p>Image creation errors:</p>
       <ul>

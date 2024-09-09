@@ -1,0 +1,123 @@
+@import "normalize.css";
+
+:root {
+  --primary: #2ae5bc;
+  --secondary: #5bd8bd;
+  --accent: #99e0d1;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  background-color: var(--secondary);
+  color: white;
+  height: 100vh;
+}
+
+h1,
+h2,
+p {
+  line-height: 0;
+}
+
+h1 {
+  font-size: 8rem;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+input:hover,
+select:hover,
+button:hover {
+  cursor: pointer;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+#header img {
+  height: 6rem;
+}
+
+form {
+  color: black;
+}
+
+label,
+button {
+  font-weight: 600;
+}
+
+select,
+input {
+  border: 1px solid rgba(216, 216, 216, 0.5);
+  padding: 8px 5px;
+  text-align: center;
+  background-color: rgb(245, 245, 245);
+  border-radius: 0.3rem;
+}
+
+form button {
+  width: 100%;
+  background-color: var(--secondary);
+  color: white;
+}
+
+button {
+  padding: 8px;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+#image-size {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+#image-size * {
+  flex-grow: 1;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 4rem 3rem;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#instructions {
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+.invert-logo {
+  height: 1.5rem;
+  filter: invert(1);
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 0;
+  font-weight: 400;
+}

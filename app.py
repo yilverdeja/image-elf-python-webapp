@@ -4,8 +4,8 @@ from PIL import Image, ImageDraw
 from io import BytesIO
 
 # constants
-ELF_GREEN_TUPLE = (102, 255, 102)
-WHITE_TUPLE = (255, 255, 255)
+ELF_GREEN_COLOR = "#2ae5bc"
+WHITE_COLOR = "white"
 IMAGE_TYPES = ["png", "jpeg"]
 
 # validate form
@@ -38,6 +38,7 @@ def get_central_placement_loc(im_draw: ImageDraw, width: int, height: int, text:
     return (x, y)
 
 app = Flask(__name__)
+
 @app.route('/', methods=['GET', 'POST'])
 def create_image():
     if request.method == 'POST':
@@ -55,7 +56,7 @@ def create_image():
         image_type = image_type.lower()
         
         # create new image with size and color
-        im = Image.new(mode="RGB", size=(image_width, image_height), color=ELF_GREEN_TUPLE)
+        im = Image.new(mode="RGB", size=(image_width, image_height), color=ELF_GREEN_COLOR)
         
         # create text and calculate font size
         size_text = f"{image_width} x {image_height}"
@@ -65,7 +66,7 @@ def create_image():
         if font_size > 0:
             im_draw = ImageDraw.Draw(im)
             xy_loc = get_central_placement_loc(im_draw, image_width, image_height, size_text, font_size)
-            im_draw.text(xy_loc, size_text, fill=WHITE_TUPLE, font_size=font_size)
+            im_draw.text(xy_loc, size_text, fill=WHITE_COLOR, font_size=font_size)
        
         # save image
         stream = BytesIO()
