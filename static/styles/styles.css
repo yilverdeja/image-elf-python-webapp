@@ -4,59 +4,70 @@
   --primary: #2ae5bc;
   --secondary: #5bd8bd;
   --accent: #99e0d1;
+  --text-white: #ffffff;
+  --text-dark: #111111;
+}
+
+html * {
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   text-align: center;
   background-color: var(--secondary);
-  color: white;
+  color: var(--text-white);
   height: 100vh;
 }
 
-h1,
-h2,
-p {
-  line-height: 0;
-}
-
 h1 {
-  font-size: 8rem;
-}
-
-h2 {
   font-size: 3rem;
 }
 
-input:hover,
-select:hover,
-button:hover {
-  cursor: pointer;
+h2 {
+  font-size: 1.2rem;
 }
 
-#header {
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#main-heading {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
-#header img {
-  height: 6rem;
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  width: 70%;
+  max-width: 768px;
+}
+
+header img {
+  height: 2.8rem;
 }
 
 form {
-  color: black;
-}
-
-label,
-button {
-  font-weight: 600;
+  color: var(--text-dark);
 }
 
 select,
@@ -71,13 +82,18 @@ input {
 form button {
   width: 100%;
   background-color: var(--secondary);
-  color: white;
+  color: var(--text-white);
+  font-weight: bold;
 }
 
 button {
   padding: 8px;
   border: none;
   border-radius: 0.3rem;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 #image-size {
@@ -91,11 +107,11 @@ button {
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: white;
+  box-shadow: 0 8px 8px 2px rgba(0, 0, 0, 0.2);
+  background-color: var(--text-white);
   border-radius: 1rem;
   padding: 2rem;
-  margin: 4rem 3rem;
+  margin: 1.5rem 1rem;
 }
 
 .form-input {
@@ -107,6 +123,7 @@ button {
 #instructions {
   font-weight: 400;
   font-size: 1.1rem;
+  margin: 1rem;
 }
 
 .invert-logo {
@@ -115,9 +132,23 @@ button {
 }
 
 footer {
+  width: 100%;
+  max-width: 768px;
+  font-weight: 400;
+}
+
+.footer-align {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 1rem 0;
-  font-weight: 400;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.no-select {
+  user-select: none;
+}
+
+@media screen and (min-width: 480px) {
 }
