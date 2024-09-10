@@ -1,15 +1,17 @@
-# Image-Elf Mini 	📸🧝🧝🏻🧝🏼🧝🏽🧝🏾🧝🏿
+<img src="static/logos/logo-gradient.svg" width="72"/>
+
+# img-elf 	📸🧝🧝🏻🧝🏼🧝🏽🧝🏾🧝🏿
 
 A simple flask app to create custom sized dummy images for testing
 
-![image](https://github.com/user-attachments/assets/c85b6682-20d2-4ba6-9277-c718a7f25387)
+![image](https://github.com/user-attachments/assets/67f2dc92-67ab-4cc4-863d-5a76b761f57b)
 
 ## Features
 
 Create an image given a specified width, height, and an image output format:
 
-- Width: A positive integer greater than 0
-- Height: A positive integer greater than 0
+- Width: A positive integer between 1 and 10000px
+- Height: A positive integer between 1 and 10000px
 - Type: An image of type `PNG` or `JPEG`
 
 ## Getting Started
@@ -84,9 +86,7 @@ To deploy this application on the cloud, you need to have configured:
 
 To improve this functionality of this tool:
 
-- Limit maximum of image and height size (to avoid Memory Errors)
 - Catch `MemoryError` exceptions and handle accordingly
-- Prettify it (Basic UI similar to Image Elf)
 - Add more configurations:
   - Select Background color (single color, or noise)
   - Choose to Show/Hide text
