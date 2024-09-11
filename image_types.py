@@ -17,9 +17,13 @@ class ImageType(ABC):
         self.image_type = image_type
         self.image_format = image_format
     
-    @abstractmethod
     def get_config_limits(self):
-        pass
+        return {
+            "min_width": 1,
+            "max_width": 10000,
+            "min_height": 1,
+            "max_height": 10000
+        }
     
     @abstractmethod
     def calculate_file_size(self, width, height, mode):
