@@ -1,6 +1,6 @@
 <img src="static/logos/logo-gradient.svg" width="72"/>
 
-# img-elf 	📸🧝🧝🏻🧝🏼🧝🏽🧝🏾🧝🏿
+# img-elf 📸🧝🧝🏻🧝🏼🧝🏽🧝🏾🧝🏿
 
 A simple flask app to create custom sized dummy images for testing
 
@@ -12,7 +12,7 @@ Create an image given a specified width, height, and an image output format:
 
 - Width: A positive integer between 1 and 10000px
 - Height: A positive integer between 1 and 10000px
-- Type: An image of type `PNG` or `JPEG`
+- Type: An image of type `PNG`, `JPEG`, `WebP`, `GIF`, `BMP`, `TIFF`, `ICO`
 
 ## Getting Started
 
@@ -90,6 +90,5 @@ To improve this functionality of this tool:
 - Add more configurations:
   - Select Background color (single color, or noise)
   - Choose to Show/Hide text
-  - More image types
 - Image file size estimator on client before creating image
 - Create images in bulk using `yaml` / `yml` or `json` by allowing users to specify requirements in a file
