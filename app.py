@@ -7,7 +7,7 @@ from io import BytesIO
 MAX_PIXELS = 10000
 ELF_GREEN_COLOR = "#2ae5bc"
 WHITE_COLOR = "white"
-IMAGE_TYPES = ["png", "jpeg"]
+IMAGE_TYPES = ["png", "jpeg", "webp", "gif", "bmp", "tiff"]
 
 # validate form
 def validate_form(image_width: str, image_height: str, image_type: str):
