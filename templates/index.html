@@ -26,13 +26,19 @@
         <form id="createForm" action="/" method="post">
           <div class="form-input">
             <label for="imageType">Image Format</label>
-            <select name="imageType" id="imageType" required>
+            <select
+              name="imageType"
+              id="imageType"
+              onchange="updateImageType()"
+              required
+            >
               <option value="png">PNG</option>
               <option value="jpeg">JPEG</option>
               <option value="webp">WEBP</option>
               <option value="gif">GIF</option>
               <option value="bmp">BMP</option>
               <option value="tiff">TIFF</option>
+              <option value="ico">ICO</option>
             </select>
           </div>
           <br />
@@ -99,5 +105,36 @@
       {% endfor %}
     </ul>
     {% endif %}
+    <script>
+      function updateImageType() {
+        const imageType = document.getElementById("imageType").value;
+        fetch("/updateImageType", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ imageType: imageType }),
+        })
+          .then((response) => response.json()) // Assuming the server will send back JSON
+          .then((data) => {
+            const imageWidth = document.getElementById("imageWidth");
+            const imageHeight = document.getElementById("imageHeight");
+            if (data.min_width !== undefined && data.max_width !== undefined) {
+              imageWidth.min = data.min_width;
+              imageWidth.max = data.max_width;
+            }
+            if (
+              data.min_height !== undefined &&
+              data.max_height !== undefined
+            ) {
+              imageHeight.min = data.min_height;
+              imageHeight.max = data.max_height;
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
   </body>
 </html>

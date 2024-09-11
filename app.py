@@ -1,13 +1,12 @@
 import os
 from flask import Flask, jsonify, redirect, render_template, request, send_file, send_from_directory
-from PIL import Image, ImageDraw
-from io import BytesIO
+import image_types as ImageTypes
 
 # constants
 MAX_PIXELS = 10000
 ELF_GREEN_COLOR = "#2ae5bc"
 WHITE_COLOR = "white"
-IMAGE_TYPES = ["png", "jpeg", "webp", "gif", "bmp", "tiff"]
+IMAGE_TYPES = ["png", "jpeg", "webp", "gif", "bmp", "tiff", "ico"]
 
 # validate form
 def validate_form(image_width: str, image_height: str, image_type: str):
@@ -31,14 +30,8 @@ def validate_form(image_width: str, image_height: str, image_type: str):
     
     return errors
 
-# get xy location for the central placement of the text
-def get_central_placement_loc(im_draw: ImageDraw, width: int, height: int, text: str, font_size: int):
-    left, top, right, bottom = im_draw.textbbox((0, 0), text, font_size=font_size)
-    x = (width / 2) - ((right - left) / 2)
-    y = (height / 2) - ((bottom - top) / 2)
-    return (x, y)
-
 app = Flask(__name__)
+selected_image_type: ImageTypes.ImageType = ImageTypes.PNG()
 
 @app.route('/', methods=['GET', 'POST'])
 def create_image():
@@ -57,25 +50,38 @@ def create_image():
         image_type = image_type.lower()
         
         # create new image with size and color
-        im = Image.new(mode="RGB", size=(image_width, image_height), color=ELF_GREEN_COLOR)
+        im = selected_image_type.create(mode="RGB", width=image_width, height=image_height)
         
-        # create text and calculate font size
-        size_text = f"{image_width} x {image_height}"
-        font_size = int(min(image_width, image_height) / 10)
-        
-        # draw text in the center
-        if font_size > 0:
-            im_draw = ImageDraw.Draw(im)
-            xy_loc = get_central_placement_loc(im_draw, image_width, image_height, size_text, font_size)
-            im_draw.text(xy_loc, size_text, fill=WHITE_COLOR, font_size=font_size)
-       
-        # save image
-        stream = BytesIO()
-        im.save(stream, image_type.upper())
-        stream.seek(0)
-        return send_file(stream, mimetype=f'image/{image_type}', as_attachment=True, download_name=f'_imgelf.{image_type}')
+        # save & download image
+        file_args = selected_image_type.save_image_as_file(im)
+        return send_file(**file_args)
     
     return render_template('index.html')
+
+@app.route('/updateImageType', methods=['POST'])
+def update_image_type():
+    global selected_image_type  # declare that we're using the global variable
+    data = request.get_json()
+    image_type = data['imageType'].lower() if data else ""
+    if image_type == "png": 
+        selected_image_type = ImageTypes.PNG()
+    elif image_type == "jpeg": 
+        selected_image_type = ImageTypes.JPEG()
+    elif image_type == "gif": 
+        selected_image_type = ImageTypes.GIF()
+    elif image_type == "webp": 
+        selected_image_type = ImageTypes.WebP()
+    elif image_type == "bmp": 
+        selected_image_type = ImageTypes.BMP()
+    elif image_type == "tiff": 
+        selected_image_type = ImageTypes.TIFF()
+    elif image_type == "ico": 
+        selected_image_type = ImageTypes.ICO()
+    else:
+        return jsonify({'error': 'Invalid image type'}), 400
+
+    config_limits = selected_image_type.get_config_limits()
+    return jsonify(config_limits)
 
 # handle favicon redirect
 @app.route('/favicon.ico')
